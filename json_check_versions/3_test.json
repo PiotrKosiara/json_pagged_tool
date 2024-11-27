@@ -1,0 +1,133 @@
+{
+    "Customer orders no": "9 (2024)",
+    "Seller": {
+        "seller_company_name": "Paged/Pisz",
+        "seller_street": "N/A",
+        "seller_city": "Oława",
+        "seller_post_code": "N/A"
+    },
+    "Place of loading": {
+        "place_of_loading_name": "Paged/Piszą Emissionklasse",
+        "place_of_loading_street": "N/A",
+        "place_of_loading_city": "Wrocław",
+        "place_of_loading_post_code": "N/A"
+    },
+    "Buyer": {
+        "buyer_company_name": "JACOBA JURGENSEN WOOD",
+        "buyer_street": "N/A",
+        "buyer_city": "N/A",
+        "buyer_post_code": "N/A",
+        "buyer_no": "N/A"
+    },
+    "Contracting": {
+        "contracting_company_name": "N/A",
+        "contracting_street": "N/A",
+        "contracting_city": "N/A",
+        "contracting_post_code": "N/A",
+        "contracting_no": "N/A"
+    },
+    "Recipient": {
+        "recipient_company_name": "N/A",
+        "recipient_street": "N/A",
+        "recipient_city": "N/A",
+        "recipient_post_code": "N/A",
+        "recipient_no": "N/A"
+    },
+    "Delivery_place": {
+        "delivery_place_name": "N/A",
+        "delivery_street": "N/A",
+        "delivery_city": "N/A",
+        "delivery_post_code": "N/A"
+    },
+    "general_order_info": {
+        "Date expected": "Weeka 17/18 (2024)",
+        "Customer's P.O.": "N/A",
+        "Our reference (trader)": "L. Borowski, K. Schabedly",
+        "Terms of delivery": "N/A",
+        "Method of payment": "N/A",
+        "Date due": "N/A",
+        "Form of delivery": "N/A"
+    },
+    "Items": [
+        {
+            "No.": "1",
+            "Index of goods": "Bucheschichtholz R3",
+            "Name": "Beech Frames II/II",
+            "thickness": "20",
+            "Notes": "N/A",
+            "Commercial Version": "2170x50",
+            "width": "2170",
+            "length": "50",
+            "Quantity ordered": "500",
+            "Unit": "m3",
+            "Volume": "1,085",
+            "Alt. UM": "N/A",
+            "Sale price": "N/A",
+            "Rabatt": "N/A",
+            "Price with rebate": "N/A",
+            "NET Value": "N/A"
+        },
+        {
+            "No.": "2",
+            "Index of goods": "Bucheschichtholz R3",
+            "Name": "Beech Frames II/II",
+            "thickness": "20",
+            "Notes": "N/A",
+            "Commercial Version": "1950x50",
+            "width": "1950",
+            "length": "50",
+            "Quantity ordered": "4000",
+            "Unit": "m3",
+            "Volume": "7,800",
+            "Alt. UM": "N/A",
+            "Sale price": "N/A",
+            "Rabatt": "N/A",
+            "Price with rebate": "N/A",
+            "NET Value": "N/A"
+        },
+        {
+            "No.": "3",
+            "Index of goods": "Bucheschichtholz R3",
+            "Name": "Beech Frames II/II",
+            "thickness": "20",
+            "Notes": "N/A",
+            "Commercial Version": "1970x70",
+            "width": "1970",
+            "length": "70",
+            "Quantity ordered": "600",
+            "Unit": "m3",
+            "Volume": "1,655",
+            "Alt. UM": "N/A",
+            "Sale price": "N/A",
+            "Rabatt": "N/A",
+            "Price with rebate": "N/A",
+            "NET Value": "N/A"
+        },
+        {
+            "No.": "4",
+            "Index of goods": "Bucheschichtholz R3",
+            "Name": "Beech Frames II/II",
+            "thickness": "22",
+            "Notes": "N/A",
+            "Commercial Version": "1950x45",
+            "width": "1950",
+            "length": "45",
+            "Quantity ordered": "500",
+            "Unit": "m3",
+            "Volume": "0,965",
+            "Alt. UM": "N/A",
+            "Sale price": "N/A",
+            "Rabatt": "N/A",
+            "Price with rebate": "N/A",
+            "NET Value": "N/A"
+        }
+    ],
+    "Total before rabat": "N/A",
+    "Skonto": "N/A",
+    "Skonto_discount": "N/A",
+    "Total_m3": "11,505 m3",
+    "Total_pcs": "N/A",
+    "Total net": "N/A",
+    "Notes": "Anmerkung: Kein Hinweis auf den Paketen auf den Lieferant",
+    "Info": "PACKAGING: Pallet width: 800-1200mm, Pallet height: max 1000mm with pallet, Ground clearance: min. 100mm"
+}

@@ -1,0 +1,97 @@
+{
+    "Customer orders no": "23020579",
+    "Seller": {
+        "seller_company_name": "PAGED MOR\u0104G S.A.",
+        "seller_street": "Mazurska 1",
+        "seller_city": "Mor\u0105g",
+        "seller_post_code": "14-300"
+    },
+    "Place of loading": {
+        "place_of_loading_name": "N/A",
+        "place_of_loading_street": "N/A",
+        "place_of_loading_city": "N/A",
+        "place_of_loading_post_code": "N/A"
+    },
+    "Buyer": {
+        "buyer_company_name": "ALTRIPAN N.V.",
+        "buyer_street": "LUITHAGEN HAVEN 19",
+        "buyer_city": "ANTWER",
+        "buyer_post_code": "2030",
+        "buyer_no": "N/A"
+    },
+    "Contracting": {
+        "contracting_company_name": "ALTRIPAN N.V.",
+        "contracting_street": "LUITHAEN HAVEN 19",
+        "contracting_city": "ANTWERPEN",
+        "contracting_post_code": "2030",
+        "contracting_no": "N/A"
+    },
+    "Recipient": {
+        "recipient_company_name": "ALTRIPAN N.V.",
+        "recipient_street": "LUITHAEN HAVEN 19",
+        "recipient_city": "ANTWERPEN",
+        "recipient_post_code": "2030",
+        "recipient_no": "N/A"
+    },
+    "Delivery_place": {
+        "delivery_place_name": "LUITHAGEN HAVEN 19",
+        "delivery_street": "LUITHAGEN HAVN 19",
+        "delivery_city": "ANTWERPEN",
+        "delivery_post_code": "2030"
+    },
+    "general_order_info": {
+        "Date expected": "AAP - 28/05/2024",
+        "Customer's P.O.": "N/A",
+        "Our reference (trader)": "Inna",
+        "Terms of delivery": "CIP",
+        "Method of payment": "KONTANT - 3%",
+        "Date due": "N/A",
+        "Form of delivery": "N/A"
+    },
+    "Items": [
+        {
+            "No.": "1",
+            "Index of goods": "BBINSPAFSCM125250214",
+            "Name": "BIRCH WIREMESH - PAGED - FSC MIX 96%",
+            "thickness": "21,0",
+            "Notes": "EN314-2/3 - EN636-3S - SGSCH-CoC-001871",
+            "Commercial Version": "1250x2500",
+            "width": "1250",
+            "length": "2500",
+            "Quantity ordered": "14,766",
+            "Unit": "m3",
+            "Volume": "5 crates @ 45 pcs/crate",
+            "Alt. UM": "pcs",
+            "Sale price": "0,00 EUR",
+            "Rabatt": "0,00%",
+            "Price with rebate": "0,00 EUR",
+            "NET Value": "0,00 EUR"
+        },
+        {
+            "No.": "2",
+            "Index of goods": "BBINSPAFSCM125250214",
+            "Name": "BIRCH WIREMESH - PAGED - FSC MIX 96%",
+            "thickness": "21,0",
+            "Notes": "EN314-2/3 - EN636-3S - SGSCH-CoC-001871",
+            "Commercial Version": "1250x2500",
+            "width": "1250",
+            "length": "2500",
+            "Quantity ordered": "1,313",
+            "Unit": "m3",
+            "Volume": "1 crate @ 20 pcs/crate",
+            "Alt. UM": "pcs",
+            "Sale price": "0,00 EUR",
+            "Rabatt": "0,00%",
+            "Price with rebate": "0,00 EUR",
+            "NET Value": "0,00 EUR"
+        }
+    ],
+    "Total before rabat": "N/A",
+    "Skonto": "3,00%",
+    "Skonto_discount": "N/A",
+    "Total_m3": "16,08 m3",
+    "Total_pcs": "6 crates",
+    "Total net": "0,00 EUR",
+    "Notes": "Taxable: VAT 0%",
+    "Info": "KONTANT - 3% payment. Delivery ASAP - 28/05/2024."
+}
