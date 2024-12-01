@@ -3,17 +3,17 @@
     "Seller": {
         "seller_company_name": "Paged/Pisz",
         "seller_street": "N/A",
-        "seller_city": "Oława",
+        "seller_city": "Pisz",
         "seller_post_code": "N/A"
     },
     "Place of loading": {
-        "place_of_loading_name": "Paged/Piszą Emissionklasse",
+        "place_of_loading_name": "Paged/Pisz Emissionklasse",
         "place_of_loading_street": "N/A",
-        "place_of_loading_city": "Wrocław",
+        "place_of_loading_city": "Pisz",
         "place_of_loading_post_code": "N/A"
     },
     "Buyer": {
-        "buyer_company_name": "JACOBA JURGENSEN WOOD",
+        "buyer_company_name": "JACOB JURGENSEN WOOD",
         "buyer_street": "N/A",
         "buyer_city": "N/A",
         "buyer_post_code": "N/A",
@@ -40,7 +40,7 @@
         "delivery_post_code": "N/A"
     },
     "general_order_info": {
-        "Date expected": "Weeka 17/18 (2024)",
+        "Date expected": "Week 17/18 (2024)",
         "Customer's P.O.": "N/A",
         "Our reference (trader)": "L. Borowski, K. Schabedly",
         "Terms of delivery": "N/A",
@@ -62,7 +62,6 @@
             "Unit": "m3",
             "Volume": "1,085",
             "Alt. UM": "N/A",
-            "Sale price": "N/A",
             "Rabatt": "N/A",
             "Price with rebate": "N/A",
             "NET Value": "N/A"
@@ -110,7 +109,6 @@
             "thickness": "22",
             "Notes": "N/A",
             "Commercial Version": "1950x45",
-            "width": "1950",
             "length": "45",
             "Quantity ordered": "500",
             "Unit": "m3",

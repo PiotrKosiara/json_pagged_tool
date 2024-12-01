@@ -1,124 +1,116 @@
-import json
 import os
-from openpyxl import Workbook
-
-def load_json(file_path):
-    """Wczytuje plik JSON i zwróci jego zawartość."""
-    with open(file_path, 'r', encoding='utf-8') as file:
-        return json.load(file)
+import json
+import openpyxl
+from openpyxl.styles import PatternFill
 
 
-def extract_keys(data, parent_key=''):
+# Ładowanie konfiguracji z pliku config.json
+def load_config(config_file="config.json"):
+    with open(config_file, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+# Funkcja do spłaszczania zagnieżdżonych słowników
+def flatten_json(data, parent_key=""):
     """
-    Rekurencyjnie wyodrębnia wszystkie klucze z JSON-a, uwzględniając ich strukturę.
-    Zwraca zestaw ścieżek kluczy (np. "key1.key2.key3").
+    Rekurencyjnie spłaszcza słownik, tworząc klucze o pełnej ścieżce.
     """
-    keys = set()
-    for k, v in data.items():
-        full_key = f"{parent_key}.{k}" if parent_key else k
-        keys.add(full_key)
-        if isinstance(v, dict):
-            keys.update(extract_keys(v, full_key))
-    return keys
+    items = []
+    for key, value in data.items():
+        new_key = f"{parent_key}.{key}" if parent_key else key
+        if isinstance(value, dict):
+            items.extend(flatten_json(value, new_key).items())
+        elif isinstance(value, list):
+            for idx, item in enumerate(value):
+                items.extend(flatten_json(item, f"{new_key}[{idx}]").items())
+        else:
+            items.append((new_key, value))
+    return dict(items)
 
 
-def compare_structures(new_json_keys, reference_keys):
+# Funkcja do porównywania dwóch spłaszczonych JSON-ów
+def compare_json(final, test):
     """
-    Porównaj strukturę kluczy nowego JSON-a z kluczami referencyjnymi.
+    Porównuje dwie struktury JSON i zwraca różnice na poziomie najbardziej wewnętrznych kluczy.
     """
-    return new_json_keys == reference_keys
+    flattened_final = flatten_json(final)
+    flattened_test = flatten_json(test)
+
+    comparison = {}
+    for key in flattened_final:
+        if key in flattened_test:
+            comparison[key] = 1 if flattened_final[key] == flattened_test[key] else 0
+        else:
+            comparison[key] = 0
+    for key in flattened_test:
+        if key not in flattened_final:
+            comparison[key] = 0
+    return comparison
 
 
-def compare_json_files(file1, file2):
-    """
-    Porównuje dwa pliki JSON i identyfikuje różnice w wartościach pól.
+# Główna funkcja do generowania raportów
+def generate_report(config):
+    golden_dir = config["golden_dir"]
+    test_dir = config["test_dir"]
+    output_file = config["output_file"]
 
-    Args:
-        file1 (str): Ścieżka do pierwszego pliku JSON.
-        file2 (str): Ścieżka do drugiego pliku JSON.
+    # Kolory do raportu
+    green_fill = PatternFill(**config["styles"]["green"])
+    red_fill = PatternFill(**config["styles"]["red"])
 
-    Returns:
-        tuple: Liczba różnic i lista pól, które się różnią.
-    """
-    # Wczytaj oba pliki JSON
-    try:
-        with open(file1, 'r', encoding='utf-8') as f1, open(file2, 'r', encoding='utf-8') as f2:
-            json1 = json.load(f1)
-            json2 = json.load(f2)
-    except Exception as e:
-        print(f"Błąd wczytywania plików: {e}")
-        return 0, []
+    # Tworzenie arkusza Excel
+    workbook = openpyxl.Workbook()
+    detail_sheet = workbook.active
+    detail_sheet.title = "Details"
+    detail_sheet.append(["No", "Golden File", "Test File", "Key", "Match"])
 
-    # Porównaj wartości
-    differing_fields = []
+    summary_sheet = workbook.create_sheet(title="Summary")
+    summary_sheet.append(["No", "Golden File", "Test File", "Accuracy (%)"])
 
-    def compare_dicts(d1, d2, parent_key=""):
-        """
-        Rekurencyjnie porównuje słowniki, uwzględniając zagnieżdżone pola.
-        """
-        for key in d1:
-            full_key = f"{parent_key}.{key}" if parent_key else key
-            if isinstance(d1[key], dict) and isinstance(d2[key], dict):
-                # Rekurencja dla zagnieżdżonych słowników
-                compare_dicts(d1[key], d2[key], full_key)
+    # Przetwarzanie plików JSON
+    files = os.listdir(golden_dir)
+    no = 1
+    for file in files:
+        if "_final" in file:
+            golden_path = os.path.join(golden_dir, file)
+            test_file = file.replace("_final", "_test")
+            test_path = os.path.join(test_dir, test_file)
+
+            if os.path.exists(test_path):
+                with open(golden_path, "r", encoding="utf-8") as f:
+                    final_data = json.load(f)
+                with open(test_path, "r", encoding="utf-8") as f:
+                    test_data = json.load(f)
+
+                comparison = compare_json(final_data, test_data)
+                matches = 0
+                total = len(comparison)
+                for key, match in comparison.items():
+                    row = [no, file, test_file, key, match]
+                    detail_sheet.append(row)
+                    matches += match
+
+                    # Kolorowanie komórek
+                    match_cell = detail_sheet.cell(row=detail_sheet.max_row, column=5)
+                    match_cell.fill = green_fill if match == 1 else red_fill
+
+                accuracy = (matches / total) * 100 if total > 0 else 0
+                summary_sheet.append([no, file, test_file, round(accuracy, 2)])
             else:
-                # Porównanie wartości
-                if d1[key] != d2[key]:
-                    differing_fields.append(full_key)
+                print(f"Test file not found: {test_file}")
+                detail_sheet.append([no, file, test_file, "File missing", 0])
+                summary_sheet.append([no, file, test_file, 0])
 
-    compare_dicts(json1, json2)
+            no += 1
 
-    # Zwróć liczbę różnic i listę różniących się pól
-    return len(differing_fields), str(differing_fields)
+    # Zapisywanie raportu do pliku
+    workbook.save(output_file)
+    print(f"Report generated: {output_file}")
 
 
-def main():
-    # Tworzenie nowego skoroszytu Excel
-    wb = Workbook()
-    ws = wb.active
+# Uruchamianie skryptu
+if __name__ == "__main__":
+    config = load_config()
+    generate_report(config)
 
-    # Nazwanie arkusza
-    ws.title = "Porównanie"
 
-    # Dodanie nagłówków kolumn
-    headers = ["Złota wersja", "Wersja testowa", "Ilość błędów", "Błędne klucze"]
-    ws.append(headers)
-
-    #foldery z złotymi wersjami jsonami i z testowymi jsonami
-    json_check_versions_folder_path = "json_check_versions"
-    json_golden_versions_folder_path = "json_golden_versions"
-
-    #pętla iterująca po wszystkich jsonach testowych
-    for filename in os.listdir(json_check_versions_folder_path):
-        file_path = os.path.join(json_check_versions_folder_path, filename)
-        if os.path.isfile(file_path) and filename.endswith('.json'):
-            test_json = load_json(file_path)
-            test_json_keys = extract_keys(test_json)
-
-            #pętla iterująca po wszystkich złotych wersjach plików json
-            golden_version_found = False
-            for filename_gold in os.listdir(json_golden_versions_folder_path):
-                file_path_gold = os.path.join(json_golden_versions_folder_path, filename_gold)
-                if os.path.isfile(file_path_gold) and filename.endswith('.json'):
-                    golden_json = load_json(file_path_gold)
-                    golden_json_keys = extract_keys(golden_json)
-
-                    #porównywanie struktury plików json (do jakiej złotej wersji pliku json pasuje json testowy)
-                    if compare_structures(test_json_keys, golden_json_keys):
-                        golden_version_found = True
-                        comparison_tuple = compare_json_files(file_path, file_path_gold)
-                        name_tuple = (filename_gold, filename)
-                        final_tuple = name_tuple + comparison_tuple
-                        ws.append(final_tuple)
-                        break
-
-            if golden_version_found == False:
-                not_found_tuple = ("Brak złotej wersji", filename, "-", )
-                ws.append(not_found_tuple)
-
-    nazwa_pliku = "porownanie.xlsx"
-    wb.save(nazwa_pliku)
-    print(f"Plik {nazwa_pliku} został utworzony.")
-
-if __name__ == '__main__':
-    main()

@@ -1,0 +1,18 @@
+{
+    "golden_dir": "json_golden_versions",
+    "test_dir": "json_check_versions",
+    "output_file": "comparison_report.xlsx",
+    "styles": {
+        "green": {
+            "start_color": "C6EFCE",
+            "end_color": "C6EFCE",
+            "fill_type": "solid"
+        },
+        "red": {
+            "start_color": "FFC7CE",
+            "end_color": "FFC7CE",
+            "fill_type": "solid"
+        }
+    }
+}
+
